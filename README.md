@@ -1,8 +1,11 @@
 # Beatup Editor JS
+
+## Download: https://github.com/caohanh1502/beatupeditorjs/releases
+
 This is an offline version of Beatup Editor on my old website
 (http://caohanh.com/beatup/editor/), written in javascript.
 
-Download: https://github.com/caohanh1502/beatupeditorjs/releases
+
 
 If you host this on your own website, it might not work correctly on some devices
 (especially on iOS devices) because I removed some codes so it's completely offline.
