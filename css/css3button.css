@@ -1,0 +1,263 @@
+.button .fa, .button .fas {
+	font-size: 30px;
+}
+.material-icons {
+	font-size: inherit;
+	line-height: 1.6;
+}
+.button .material-icons {
+	font-size: 36px;
+	line-height: 1.5;
+}
+
+.button {
+	border: 0px;
+	background-image: -webkit-linear-gradient(top, #f4f1ee, #fff);
+	background-image: linear-gradient(top, #f4f1ee, #fff);
+	border-radius: 50%;
+	box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204, 198, 197, .5);
+	height: 70px;
+	margin: 0 5px 5px 0;
+	position: relative;
+	width: 70px;
+	-webkit-transition: all .1s linear;
+	transition: all .1s linear;
+}
+
+.heart:after {
+	content: "❤";
+	left: 21px;
+	top: 16px;
+}
+
+.flower:after {
+	content: "✿";
+	left: 23px;
+	top: 14px;
+}
+
+.tick:after {
+	content: "✔";
+	left: 23px;
+	top: 16px;
+}
+
+.cross:after {
+	content: "✖";
+	left: 24px;
+	top: 15px;
+}
+
+.heart:hover:after {
+	color: #f94e66;
+	text-shadow: 0px 0px 6px #f94e66;
+}
+
+.flower:hover:after {
+	color: #f99e4e;
+	text-shadow: 0px 0px 6px #f99e4e;
+}
+
+.tick:hover:after {
+	color: #83d244;
+	text-shadow: 0px 0px 6px #83d244;
+}
+
+.cross:hover:after {
+	color: #eb2f2f;
+	text-shadow: 0px 0px 6px #eb2f2f;
+}
+
+.button:active:not([disabled]) {
+	background-image: -webkit-linear-gradient(top, #efedec, #f7f4f4);
+	background-image: linear-gradient(top, #efedec, #f7f4f4);
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .4), inset 0px -3px 1px 1px rgba(204, 198, 197, .5);
+}
+
+.button:active:after {
+	color: #dbd2d2;
+	text-shadow: 0px -1px 1px #bdb5b4, 0px 1px 1px white;
+}
+
+.button:focus {
+	outline: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204, 198, 197, .5);
+}
+
+.button:focus:active {
+	outline: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .4), inset 0px -3px 1px 1px rgba(204, 198, 197, .5);
+}
+
+.button .css3icon {
+	display: block;
+	height: 30px;
+	text-decoration: none;
+	position: absolute;
+	width: 30px;
+	font-style: normal;
+	font-family: arial !important;
+}
+/* CUSTOM */
+.button:hover {
+	background-image: -webkit-linear-gradient(top, #fff, #f4f1ee);
+	background-image: linear-gradient(top, #fff, #f4f1ee);
+}
+.button.red:not([disabled]){
+	color: #eb2f2f;
+}
+.button.red:not([disabled]):hover  {
+	color: #eb2f2f;
+	text-shadow: 0px 0px 6px #eb2f2f;
+}
+.button.blue:not([disabled]){
+	color: #007bff;
+}
+.button.blue:not([disabled]):hover {
+	color: #007bff;
+	text-shadow: 0px 0px 6px #007bff;
+}
+.button.black:not([disabled]){
+	color: black;
+}
+.button.black:not([disabled]):hover  {
+	color: black;
+	text-shadow: 0px 0px 6px black;
+}
+.button.orange:not([disabled]){
+	color: orange;
+}
+.button.orange:not([disabled]):hover  {
+	color: #f99e4e;
+	text-shadow: 0px 0px 6px #f99e4e;
+}
+.button.green:not([disabled]){
+	color: green;
+}
+.button.green:not([disabled]):hover {
+	color: green;
+	text-shadow: 0px 0px 6px green;
+}
+.button.purple:not([disabled]){
+	color: blueviolet;
+}
+.button.purple:not([disabled]):hover {
+	color: blueviolet;
+	text-shadow: 0px 0px 6px blueviolet;
+}
+.button.blue2:not([disabled]){
+	color: #0097af;
+}
+.button.blue2:not([disabled]):hover {
+	color: #0097af;
+	text-shadow: 0px 0px 6px #0097af;
+}
+
+/* MUSIC ICON */
+.css3icon.css3icon-music{
+	top: 12px;
+	left: 20px;
+}
+.css3icon.css3icon-music:after {
+	content: "\266C\FE0E";
+	font-size: 30px;
+	font-weight: bold;
+}
+/* PLAY ICON */
+.css3icon.css3icon-play{
+	top: 12px;
+	left: 22px;
+}
+.css3icon.css3icon-play:after {
+	content: "\25B6\FE0E";
+	font-size: 30px;
+}
+/* PAUSE ICON */
+.css3icon.css3icon-pause{
+	top: 17px;
+	left: 20px;
+}
+.css3icon.css3icon-pause:after {
+	content: "\275A\275A";
+	font-size: 26px;
+}
+/* STOP ICON */
+.css3icon.css3icon-stop{
+	top: 12px;
+	left: 19px;
+}
+.css3icon.css3icon-stop:after {
+	content: "\25FC\FE0E";
+	font-size: 30px;
+}
+/* CLEAR NOTE ICON */
+.css3icon.css3icon-clearnote{
+	top: 12px;
+	left: 20px;
+}
+.css3icon.css3icon-clearnote:after {
+	content: "\2716\FE0E";
+	font-size: 32px;
+	font-weight: bold;
+}
+/* RANDOM NOTE ICON */
+.css3icon.css3icon-randnote{
+	top: 12px;
+	left: 19px;
+}
+.css3icon.css3icon-randnote:after {
+	content: "\21BA\FE0E";
+	font-size: 30px;
+	font-weight: bold;
+}
+/* SLK NOTE ICON */
+.css3icon.css3icon-slk{
+	top: 22px;
+	left: 19px;
+}
+.css3icon.css3icon-slk:after {
+	content: "SLK";
+	font-size: 15px;
+	font-weight: bold;
+}
+/* RESPONSIVE */
+@media only screen and (max-width: 530px) {
+	.button .fa, .button .fas {
+		font-size: 20px;
+	}
+	.button .material-icons {
+		font-size: 26px;
+		line-height: unset;
+	}
+	.button {
+		width: 50px;
+		height: 50px;
+	}
+	.button .css3icon:not(.css3icon-slk){
+		top: 3px;
+		left: 11px;
+	}
+	.button .css3icon.css3icon-slk{
+		top: 12px;
+		left: 10px;
+	}
+
+}
+@media only screen and (max-width: 374px) {
+	.button {
+		width: 40px;
+		height: 40px;
+	}
+	.button .css3icon:not(.css3icon-slk){
+		top: -2px;
+		left: 5px;
+	}
+	.button .css3icon.css3icon-slk{
+		top: 7px;
+		left: 5px;
+	}
+}

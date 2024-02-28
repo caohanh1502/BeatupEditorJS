@@ -1,0 +1,39 @@
+.form-check-input,.form-check-label{
+	cursor: pointer;
+}
+a[href]:not([class]){
+	text-decoration: none;
+}
+a[href]:not([class]):hover{
+	text-decoration: underline;
+}
+a[onclick]:not([class]){
+	color: #007bff;
+}
+a[onclick]:not([class]):hover {
+	color: #0056b3;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/* BEGIN TOP RIGHT X CLOSE ICON OF MODAL IN DARK THEME */
+[data-theme="dark"] .btn-close {
+	filter: invert(1) grayscale(100%) brightness(200%);
+}
+/* END TOP RIGHT X CLOSE ICON OF MODAL IN DARK THEME */
+
+/* BEGIN DARK THEME FOR TABLE */
+[data-theme="dark"] table.table {
+	--bs-table-bg: transparent; /* #212529; */
+    --bs-table-striped-bg: #2c3034;
+    --bs-table-striped-color: #fff;
+    --bs-table-active-bg: #373b3e;
+    --bs-table-active-color: #fff;
+    --bs-table-hover-bg: #323539;
+    --bs-table-hover-color: #fff;
+    border-color: #373b3e;
+}
+[data-theme="dark"] table.table thead {
+    --bs-table-bg: #0e0e0e !important;
+}
+/* END DARK THEME FOR TABLE */

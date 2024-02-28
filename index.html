@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<title>Beatup Editor JS v1.0.0 - by caohanh1502</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css?v=1.0.0">
+	<link rel="stylesheet" href="css/transitions.css?v=1.0.0">
+	<link rel="stylesheet" href="css/loader-default.css?v=1.0.0">
+	<link rel="stylesheet" href="css/inputrange.css?v=1.0.0">
+	<link rel="stylesheet" href="css/bueditor.css?v=1.0.0">
+	<link rel="stylesheet" href="css/css3button.css?v=1.0.0">
+	<link rel="stylesheet" href="css/bootstrap-select.min.css?v=1.0.0">
+	<link rel="stylesheet" href="css/fa_all.min.css?v=1.0.0" />
+	<link rel="stylesheet" href="css/darktheme.css?v=1.0.0"/>
+	<link rel="stylesheet" href="css/site-custom.css?v=1.0.0"/>
+	<script type="text/javascript" src="js/jquery.min.js?v=1.0.0"></script>
+	<script type="text/javascript" src="js/popper.min.js?v=1.0.0"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js?v=1.0.0"></script>
+	<script type="text/javascript" src="js/async.min.js?v=1.0.0"></script>
+	<script type="text/javascript" src="js/bootstrap-select.min.js?v=1.0.0"></script>
+	<script type="text/javascript" src="js/xlsx.full.min.js?v=1.0.0"></script>
+	<script type="text/javascript" src="js/bueditor.min.js?v=1.0.0"></script>
+</head>
+<body>
+	<div id="spinner" class="loader loader-default is-active" data-text data-blink style="display:none;"></div>
+	<div class="container-fluid" style="padding:8px;">
+		<!-- This hidden div preloads fontawesome! -->
+		<!-- <div style="width:0px;height:0px;overflow:hidden;"><i class="fa fa-square-o fa-3x"></i></div> -->
+		<!-- This hidden div preloads fontawesome! -->
+		<div id="content">
+			<div id="blacktimeline"></div>
+			<div id="bar" class="bar red"></div>
+		</div>
+		<input type="range" data-js="seek" id="seek" class="e-range" min="0" max="0" style="width:100%"/>
+		<div style="display:table;width:100%;margin-right:auto;margin-left:auto;">
+			<span id="currenttime" style="display:table-cell">00:00:00.000</span>
+			<span id="status" style="text-align:center;position:absolute;margin-left: auto;margin-right: auto;left: 0;right: 0;"></span>
+			<span id="durationtime" style="display:table-cell;text-align:right;">00:00:00.000</span>
+		</div>
+		<!-- Modal Input -->
+		<div class="modal fade" id="modal_input" data-backdrop="static" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal_input_title" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="modal_input_title">Input</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body" id="optradiomusic" style="padding-top:5px;padding-bottom:.5rem">
+				<div class="row">
+					<div class="form-group col-6 col-sm-5 col-md-5 col-lg-4" style="margin-bottom:5px">
+						<label for="musicbpm"><span style="font-weight:500">Bpm </span><span id="recomdbpm" style="display:none;font-size:60%"></span></label>
+						<input type="text" class="form-control form-control-sm" id="musicbpm" value="138">
+					</div>
+					<div class="form-group col-6 col-sm-5 col-md-5 col-lg-4" style="margin-bottom:5px">
+						<label for="musicoffset"><span style="font-weight:500">Offset</span></label>
+						<input type="text" class="form-control form-control-sm" id="musicoffset" value = "0.7">
+					</div>
+				</div>
+				<!-- BREAK -->
+				<div class="border-top my-1"></div>
+				<!-- BREAK -->
+				<div style="font-weight:500;"><i class="fas fa-folder-open"></i> Input music<span style="color:red">*</span></div>
+				<div style="padding-left:15px">
+					<div class="row form-inline align-items-center">
+						<div class="col-sm-12 col-md-4 col-lg-3">
+							<div class="form-check">
+								<input type="radio" disabled id="optradiomusic_1" class="form-check-input" value="1" name="optradiomusic">
+								<label class="form-check-label" for="optradiomusic_1">From server:</label>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-8 col-lg-5">
+							<div class="input-group">
+								<select id="musiclist" disabled class="form-control form-control-sm" name="musiclist">
+									<option hidden selected="true" disabled>(Not Available)</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-12 col-lg-4">
+							<div class="form-check" style="margin-left:20px;">
+								<input type="checkbox" disabled class="form-check-input" id="setbpm_chk">
+								<label class="form-check-label" for="setbpm_chk">Re-use Bpm & Offset</label>
+							</div>
+						</div>
+					</div>
+					<div class="row form-inline align-items-center" style="margin-top:5px">
+						<div class="col-sm-12 col-md-4 col-lg-3">
+							<div class="form-check">
+								<input type="radio" checked id="optradiomusic_2" class="form-check-input" value="2" name="optradiomusic">
+								<label class="form-check-label" for="optradiomusic_2">From local file:</label>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-8 col-lg-5"> <!-- col-lg-5 -->
+							  <input type="file" class="form-control form-control-sm" id="fileinputmusic" aria-describedby="fileinputmusic" accept=".mp3,.ogg,.aac,.wav,.wma,.m4a,.flac,.alac">
+						</div>
+					</div>
+					<div class="row form-inline align-items-center" style="margin-top:5px">
+						<div class="col">
+							<label id="loadmusic_status" style="font-size:13px;margin-bottom:0px;"></label>
+						</div>
+						<div class="col-auto">
+							<button type="button" data-js="load" class="btn btn-primary btn-sm float-end" style="">Load music</button>
+						</div>
+					</div>
+				</div>
+				<!-- BREAK -->
+				<div class="border-top my-2"></div>
+				<!-- BREAK -->
+				<div class="form-check" style="font-weight:500;">
+					<input type="checkbox" class="form-check-input green" id="inputslk_chk">
+					<label class="form-check-label" for="inputslk_chk">Input SLK</label>
+				</div>
+				<div id="inputslk" style="padding-left:15px;display:none">
+					<div class="row form-inline align-items-center">
+						<div class="col-md-4 col-lg-3">
+							<div class="form-check">
+							  <input type="radio" disabled class="form-check-input" id="optradioslk_1" value="1" name="optradioslk">
+							  <label class="form-check-label" for="optradioslk_1">From server:</label>
+							</div>
+						</div>
+							<div class="col-md-8 col-lg-5">
+								<div class="input-group">
+									<select id="slklist" disabled class="form-control form-control-sm" name="slklist">
+										<option hidden selected="true" disabled>(Not Available)</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-4 col-lg-4">
+							</div>
+						
+					</div>
+					<div class="row form-inline align-items-center" style="margin-top:5px">
+						<div class="col-md-4 col-lg-3">
+							<div class="form-check">
+							  <input type="radio" checked class="form-check-input" id="optradioslk_2" value="2" name="optradioslk">
+							  <label class="form-check-label" for="optradioslk_2">From local file:</label>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-8 col-lg-5">
+							<input type="file" class="form-control form-control-sm" id="fileinputslk" aria-describedby="fileinputslk" accept=".json, .slk, .xlsx, .xls">
+						</div>
+					</div>
+					<div class="row form-inline align-items-center" style="margin-top:5px">
+						<div class="col">
+							<label id="loadslk_status" style="font-size:13px;margin-bottom:0px;"></label>
+						</div>
+						<div class="col-auto">
+							<button type="button" id="loadslk" class="btn btn-primary btn-sm float-end" style="">Load SLK</button>
+						</div>
+					</div>
+				</div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" id="loadunsavedslk" class="btn btn-info btn-sm me-auto" style="display:none">Load unsaved SLK</button>
+				<button type="button" class="btn btn-success" data-dismiss="modal" data-bs-dismiss="modal">Done</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<!-- Modal Output -->
+		<div class="modal fade" id="modal_output" data-backdrop="static" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modal_output_title" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="modal_output_title">Output</h5>
+				<button type="button" class="btn-close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body">
+				<div id="musicserver" style="display:none;">
+					<div style="font-weight:500;"><i class="fas fa-file-audio"></i> Export music:&nbsp;<a title="Click to download" href="#" id="musicserverlink" target="_blank">Download</a>
+					</div>
+					<hr>
+				</div>
+				<div style="font-weight:500;"><i class="fas fa-file-alt"></i> Export SLK</div>
+				<div style="padding-left:15px">
+					<div class="row form-inline align-items-center">
+						<div class="col-sm-12 col-md-4 col-lg-3">
+							<div class="form-check">
+								<input type="radio" checked id="optradiooutslk_1" class="form-check-input" value="1" name="optradiooutslk">
+								<label class="form-check-label" for="optradiooutslk_1">Export as .json</label>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-8 col-lg-9">
+						</div>
+					</div>
+					<div class="row form-inline align-items-center" style="margin-top:5px">
+						<div class="col-sm-12 col-md-4 col-lg-3">
+							<div class="form-check">
+								<input type="radio" id="optradiooutslk_2" class="form-check-input" value="2" name="optradiooutslk">
+								<label class="form-check-label" for="optradiooutslk_2">Export as .slk</label>
+							</div>
+						</div>
+						<div class="col-sm-12 col-md-8 col-lg-9">
+						</div>
+					</div>
+					<div class="row form-inline align-items-center" style="margin-top:5px">
+						<div class="col">
+							<label id="exportslk_status" style="font-size:13px;margin-bottom:0px;"></label>
+						</div>
+						<div class="col-auto">
+							<button type="button" id="exportslk" class="btn btn-primary btn-sm float-end" style="">Export</button>
+						</div>
+					</div>
+				</div>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		<div>
+			<button type="button" class="button blue2" data-toggle="modal" data-bs-toggle="modal" data-target="#modal_input" data-bs-target="#modal_input"><i class="fas fa-bars"></i></button>
+			<span class="playable" style="display:none" role="group">
+				<button data-js="play" class="button orange" onclick="this.blur()";><i class="fas fa-play"></i></button>
+				<button data-js="stop" class="button black" onclick="this.blur()"><i class="fas fa-stop"></i></button>
+				<button type="button" id="clearnotes" class="button red" onclick="this.blur()"><i class="fas fa-trash-alt"></i></button>
+				<button type="button" id="randnotes" class="button purple" onclick="this.blur()"><i class="fas fa-random"></i></button>
+				<button type="button" class="button blue" data-toggle="modal" data-bs-toggle="modal" data-target="#modal_output" data-bs-target="#modal_output"><i class="fas fa-cloud-download-alt"></i></button>
+			</span>
+			<button type="button" id="refresh" style="float:right;display:none">Refresh (F5)</button>
+		</div>
+		<div class="clearfix"></div>
+		<span>
+			<div class="row align-items-center" style="padding-top:10px">
+				<div class="col-auto playable" style="display:none">
+					<button type="button" id="movebackground" class="btn btn-secondary btn-sm">Move BG: <span id="bgoffsetnum">0</span></button>
+				</div>
+				<div class="col-auto">
+					<button type="button" id="changebar" class="btn btn-secondary btn-sm">Change bar</button>
+				</div>
+				<div class="col-auto">
+					<div class="form-check">
+						<input type="checkbox" id="isFollow" class="form-check-input" checked>
+						<label for="isFollow" class="form-check-label">Follow bar</label>
+					</div>
+				</div>
+			</div>
+		</span>
+		<div class="border-top my-2" style="margin-bottom:0px !important"></div>
+		<div class="row" style="margin-top:5px;">
+			<div class="form-group col-6 col-sm-4 col-md-4 col-lg-3" style="margin:0px">
+				<span>Sound:</span>
+				<input id="volume_s" class="volume" type="range" min="0" max="100" value="100" />
+			</div>
+		</div>
+		<div class="row" style="margin-top:5px;">
+		</div>
+		<div class="row">
+			<div class="form-group col-6 col-sm-3 col-md-2" style="margin:0px">
+				<span>Current Combo:</span>
+			</div>
+			<div class="form-group col-6 col-sm-3 col-md-2" style="margin:0px">
+				<span id="currentCombo"></span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-6 col-sm-3 col-md-2" style="margin-bottom:0px">
+				<span>Current Beat:</span>
+			</div>
+			<div class="form-group col-6 col-sm-3 col-md-2" style="margin-bottom:0px">
+				<span id="currentBeat"></span>
+			</div>
+		</div>
+		<div>Notes: <textarea id="sheet" readonly disabled></textarea></div>
+		<div class="form-check form-switch">
+		    <input type="checkbox" class="form-check-input" id="darkSwitch" />
+		    <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+		</div>
+		<!-- BEGIN DARKMODE JS TOGGLE -->
+		<script type="text/javascript" src="js/dark-mode-switch.min.js?v=1.0.0"></script>
+		<!-- END DARKMODE JS TOGGLE -->
+	</div>
+</body>
+</html>
